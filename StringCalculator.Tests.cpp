@@ -41,7 +41,7 @@ TEST(string_calculator_add_when_passed_multiple_comma_delimited_numbers,returns_
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
-TEST(string_calculator_add_when_passed_multiple_comma_delimited_numbers,returns_their_sum){
+TEST(string_calculator_add_when_passed_multiple_comma_delimited_numbers,returns_their_sum_1){
  //Arrange
   StringCalculator calculator;
   string input="1,2,3";
