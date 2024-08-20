@@ -27,3 +27,4 @@ same encoding. Here are the rules for Soundex, per Wikipedia: [Soundex - Wikiped
 - Uncovered lines indicate an opportunity to write tests. Complex and repetitive tests indicate opportunity to simplify the code.
 
 > Caution: High coverage doesn't indicate absence of bugs!
+
