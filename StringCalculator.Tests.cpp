@@ -84,3 +84,43 @@ TEST(string_calculator_add_when_passed_negative_numbers,throws_an_exception_list
   //Assert
   ASSERT_THROW(calculator.Add("1,-2,-4,5"), std::invalid_argument);
 }
+TEST(string_calculator_add_when_passed_numbers_over_1000,ignores_them){
+ //Arrange
+  StringCalculator calculator;
+  string input="42,1001,3";
+  int expectedsum=45;
+  //Act
+  int actualSum=calculator.Add(input);
+  //Assert
+  ASSERT_EQ(actualSum,expectedsum);
+}
+TEST(string_calculator_add_when_passed_multicharacter_delimiter,uses_that_delimiter_to_sum_values){
+ //Arrange
+  StringCalculator calculator;
+  string input="//[***]\n8***2***3";
+  int expectedsum=13;
+  //Act
+  int actualSum=calculator.Add(input);
+  //Assert
+  ASSERT_EQ(actualSum,expectedsum);
+}
+TEST(string_calculator_add_when_passed_multiple_delimiters,sums_on_each_delimiter){
+ //Arrange
+  StringCalculator calculator;
+  string input="//[*][%]\n4*2%3";
+  int expectedsum=9;
+  //Act
+  int actualSum=calculator.Add(input);
+  //Assert
+  ASSERT_EQ(actualSum,expectedsum);
+}
+TEST(string_calculator_add_when_passed_multiple_multicharacter_delimiters,sums_on_each_delimiter_1){
+ //Arrange
+  StringCalculator calculator;
+  string input="//[**][%^]\n4**1%^9";
+  int expectedsum=14;
+  //Act
+  int actualSum=calculator.Add(input);
+  //Assert
+  ASSERT_EQ(actualSum,expectedsum);
+}
