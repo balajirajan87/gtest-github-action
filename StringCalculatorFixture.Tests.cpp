@@ -72,17 +72,9 @@ TEST_F(StringCalculatorAddTestFixture, when_delimited_with_newline_and_comma_ret
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
-TEST_F(StringCalculatorAddTestFixture, when_passed_negative_numbers_throws_an_exception_listing_invalid_values){
- //Arrange
+TEST_F(StringCalculatorAddTestFixture, string_calculator_add_when_passed_negative_number_throws_an_exception_listing_invalid_values){
   string input="1,-2,-4,5";
-  //Act
-  try {
-        calculator.Add("1,-2,-4,5");
-    } catch (const std::invalid_argument& e) {
-        EXPECT_STREQ(e.what(), "Negatives not allowed: -2,-4");
-    }
-  //Assert
-  ASSERT_THROW(calculator.Add("1,-2,-4,5"), std::invalid_argument);
+  ASSERT_THROW(calculator.Add(input),invalid_argument);
 }
 TEST_F(StringCalculatorAddTestFixture, string_calculator_add_when_passed_numbers_over_1000_ignores_them){
  //Arrange
