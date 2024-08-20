@@ -45,7 +45,7 @@ TEST(string_calculator_add_when_passed_multiple_comma_delimited_numbers,returns_
  //Arrange
   StringCalculator calculator;
   string input="1,2,3";
-  int expectedsum=3;
+  int expectedsum=6;
   //Act
   int actualSum=calculator.Add(input);
   //Assert
