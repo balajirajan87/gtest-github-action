@@ -18,8 +18,8 @@ enable_testing()
 add_compile_options("--coverage")
 add_executable(
   cleancode
-  TestChallenge.cpp
-  TestChallenge.Tests.cpp
+  TestChallengeUsingGmock.cpp
+  TestChallengeUsingGmock.Tests.cpp
   
 )
 target_link_libraries(
