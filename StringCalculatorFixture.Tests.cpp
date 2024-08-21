@@ -2,11 +2,32 @@
 #include <gtest/gtest.h>
 
 //Fixture
+//Fixture
 class StringCalculatorAddTestFixture:public testing::Test{
   protected:
     //Common Reusable Code
-    StringCalculator calculator;
+    StringCalculator *calculator;
     //Hook Callbacks
+  // You can define per-test-suite set-up logic as usual.
+     static void SetUpTestSuite() {
+       std::cout<<"StringCalculatorAddTestFixture Setup"<<std::endl;
+     }
+ // You can define per-test-suite tear-down logic as usual.
+     static void TearDownTestSuite() {
+       std::cout<<"StringCalculatorAddTestFixture TearDown"<<std::endl;
+     }
+  // You can define per-test set-up logic as usual.
+  void SetUp() override {
+    calculator=new StringCalculator();
+    std::cout<<"Test Setup"<<std::endl;
+  }
+
+  // You can define per-test tear-down logic as usual.
+  void TearDown() override {
+    delete calculator;
+    std::cout<<"Test Teardown"<<std::endl;
+  }
+
 };
 
 TEST_F(StringCalculatorAddTestFixture,_when_passed_a_single_number_returns_0_for_empty_string){
@@ -14,7 +35,7 @@ TEST_F(StringCalculatorAddTestFixture,_when_passed_a_single_number_returns_0_for
   string input="";
   int expectedsum=0;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -23,7 +44,7 @@ TEST_F(StringCalculatorAddTestFixture,when_passed_a_single_number_returns_0_for_
   string input="0";
   int expectedsum=0;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -32,7 +53,7 @@ TEST_F(StringCalculatorAddTestFixture, when_passed_a_single_number_returns_1_for
   string input="1";
   int expectedsum=1;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -41,7 +62,7 @@ TEST_F(StringCalculatorAddTestFixture, when_passed_multiple_comma_delimited_numb
   string input="1,2";
   int expectedsum=3;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -50,7 +71,7 @@ TEST_F(StringCalculatorAddTestFixture, when_passed_multiple_comma_delimited_numb
   string input="1,2,3";
   int expectedsum=6;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -59,7 +80,7 @@ TEST_F(StringCalculatorAddTestFixture, when_delimited_with_newline_and_comma_ret
   string input="1\n2,3";
   int expectedsum=6;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -68,20 +89,20 @@ TEST_F(StringCalculatorAddTestFixture, when_delimited_with_newline_and_comma_ret
   string input="//;\n1;2";
   int expectedsum=3;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
 TEST_F(StringCalculatorAddTestFixture, string_calculator_add_when_passed_negative_number_throws_an_exception_listing_invalid_values){
   string input="1,-2,-4,5";
-  ASSERT_THROW(calculator.Add(input),invalid_argument);
+  ASSERT_THROW(calculator->Add(input),invalid_argument);
 }
 TEST_F(StringCalculatorAddTestFixture, string_calculator_add_when_passed_numbers_over_1000_ignores_them){
  //Arrange
   string input="42,1001,3";
   int expectedsum=45;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -90,7 +111,7 @@ TEST_F(StringCalculatorAddTestFixture, when_passed_multicharacter_delimiter_uses
   string input="//[***]\n8***2***3";
   int expectedsum=13;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -99,7 +120,7 @@ TEST_F(StringCalculatorAddTestFixture, when_passed_multiple_delimiters_sums_on_e
   string input="//[*][%]\n4*2%3";
   int expectedsum=9;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
@@ -108,7 +129,7 @@ TEST_F(StringCalculatorAddTestFixture, when_passed_multiple_multicharacter_delim
   string input="//[**][%^]\n4**1%^9";
   int expectedsum=14;
   //Act
-  int actualSum=calculator.Add(input);
+  int actualSum=calculator->Add(input);
   //Assert
   ASSERT_EQ(actualSum,expectedsum);
 }
