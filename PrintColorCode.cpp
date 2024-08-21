@@ -39,7 +39,7 @@ int printColorMap(std::function<void(int,const char*,const char*)> printer){
     int i = 0, j = 0;
     for(i = 0; i < 5; i++) {
         for(j = 0; j < 5; j++) {
-            printer(i * 5 + j , majorColor[i], minorColor[i] );
+            printer(i * 5 + j , majorColor[i], minorColor[j] );
             //std::cout << i * 5 + j << " | " << majorColor[i] << " | " << minorColor[i] << "\n";
         }
     }
